@@ -21,10 +21,14 @@ header {
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  border-bottom-left-radius: 120px;
+  border-bottom-right-radius: 120px;
 }
 
 header:hover {
   padding: 20px 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 header nav ul {
