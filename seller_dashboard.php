@@ -8,6 +8,7 @@ if (!isset($_SESSION["user_id"])) {
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+$_SESSION['success_message'] = "";
 
 include "initialize_sellerHouses.php";
 
@@ -109,30 +110,25 @@ unset($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeNest</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
+
 <header>
-    <div class="logo">HomeNest</div>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Houses?</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
     <div class="profile">
         <p>
         Welcome, <?php echo $_SESSION["username"]; ?> | <a href="logout.php">Logout</a>
         </p>
     </div>
 </header>
+
+
 <main>
     <div class="board-title">
         <h2>Your Houses For Sale</h2>
     </div>
 
-    <?php if (isset($_SESSION['success_message'])): ?>
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['success_message'])): ?>
             <div class="success-message" style="margin:auto; width:20%; text-align:center;"><?php echo $_SESSION['success_message']; ?></div>
             <script>
                 // Show the success message div
@@ -165,6 +161,7 @@ unset($pdo);
                                 <span class="bed"><?php echo $house['bedrooms']; ?> beds</span>
                                 <span class="bath"><?php echo $house['bathrooms']; ?> baths</span>
                                 <span class="sqft"><?php echo $house['site_sqft']; ?> sqft</span>
+                                <span class="age">Age: <?php echo $house['age']; ?></span>
                             </div>
                             <div class="house-card-features">
                                 <span class="feature">
@@ -173,6 +170,13 @@ unset($pdo);
                                 <span class="feature">
                                     <?php echo $house['parking'] ? 'Has Parking' : 'Does not have Parking'; ?>
                                 </span>
+                                <?php if (!empty($house['proximity_facilities'])): ?>
+                                    <span class="feature">Facilities: <?php echo $house['proximity_facilities']; ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($house['proximity_roads'])): ?>
+                                    <span class="feature">Roads: <?php echo $house['proximity_roads']; ?></span>
+                                <?php endif; ?>
+                                <span class="feature">Property Tax: $<?php echo number_format($house['property_tax'], 2); ?></span>
                             </div>
                             <a href="edit-house.php?id=<?php echo $house['id']; ?>" class="edit-link">Edit</a>
                         </div>
@@ -185,7 +189,7 @@ unset($pdo);
 
 <div class="popup" id="popup" style="display:none;">
     <div class="popup-content">
-        <span class="close" id="close">&times;</span>
+        <span class="close" id="close">&times</span>
         <!-- Add House Form-->
         <div id="add-house-form" style="display:none;">
             <h2>Add a House</h2>
@@ -206,7 +210,7 @@ unset($pdo);
                 </select>
                 <input type="text" name="proximity_facilities" placeholder="Proximity to Nearby Facilities (Optional)">
                 <input type="text" name="proximity_roads" placeholder="Proximity to Main Roads (Optional)">
-                <input type="file" name="house_image" accept="image/.jpg,image/.jpeg,image/.png" required>
+                <input type="file" name="house_image" accept="image/.jpg,image/.jpeg,image/.png">
                 <button type="submit">Add House</button>
             </form>
         </div>
@@ -234,6 +238,7 @@ unset($pdo);
     addHouseBtn.addEventListener('click', () => {
         popup.style.display = 'block';
         addHouseForm.style.display = 'block';
+        successMessage.style.display = 'none';
     });
 
     closeBtn.addEventListener('click', () => {

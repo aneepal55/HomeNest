@@ -1,9 +1,9 @@
 <?php
 // Database connection
 $host = "localhost";
-$dbusername = "";
+$dbusername = "root";
 $dbpassword = "";
-$dbname = "";
+$dbname = "homeNest";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $dbusername, $dbpassword);

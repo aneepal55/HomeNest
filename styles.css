@@ -1,13 +1,21 @@
 main{
     display: inline-block;
     width: 100%;
+    margin-top: 50px;
+}
+
+.profile{
+    position: fixed;
+    top: 20px;
+    right: 20px;
 }
 
 .seller-board{
     width: 60%;
     margin: auto;
-    border: solid black;
-    padding: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);    padding: 100px;
 }
 
 .board-title{
@@ -37,6 +45,7 @@ main{
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
+    border-radius: 10px;
 }
 
 .close {
@@ -44,6 +53,13 @@ main{
     top: 20px;
     right: 30px;
     cursor: pointer;
+    color:black; 
+    font-size: 28px;
+    transition-duration: 0.1s;
+}
+.close:hover{
+    transform: scale(1.1);
+    color: #3f3f3f;
 }
 
 .house-cards {
@@ -59,7 +75,8 @@ main{
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 300px;
+    width: 350px;
+    margin: auto;
 }
 
 .house-card-img {
@@ -109,7 +126,8 @@ main{
 }
 
 .house-card-features .feature {
-    margin-right: 10px;
+    margin-right: 30px;
+    margin-bottom: 10px;
     font-size: 14px;
     color: #555;
 }
@@ -121,5 +139,10 @@ main{
     color: #fff;
     text-decoration: none;
     border-radius: 3px;
+    transition-duration: 0.2s;
 }
 
+.edit-link:hover{
+    transform: scale(1.1);
+    background-color: #146bc8;
+}
