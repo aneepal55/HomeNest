@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Poppins";
+  src: url(Poppins-Regular.ttf);
+}
+
 body,
 html {
   font-family: "Poppins", sans-serif;
@@ -186,41 +191,48 @@ footer p {
 .popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 3; /* Sit on top */
+    z-index: 1000; /* Sit on top, increase if needed */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    overflow: auto; /* Enable scroll if needed, removed conflicting overflow-y */
 }
 
 .popup-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative; /* Added for better control of positioning */
+    width: 90%; /* Adjust width of the inner content */
+    max-width: 600px; /* Maximum width */
+    margin: 5% auto; /* Changed to percentage for better vertical alignment */
+    background: white; /* Background color */
+    padding: 20px; /* Padding inside the content */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for pop-up */
+    border-radius: 8px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding and border are included in width/height */
+}
+
+@media (max-width: 600px) {
+    .popup-content {
+        margin: 20% auto; /* Increased margin on smaller devices */
+        padding: 10px; /* Reduced padding on smaller devices */
+    }
 }
 
 .close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
-
 
 .popup:target {
-    display: block;
+  display: block;
 }
-
