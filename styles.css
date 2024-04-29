@@ -1,290 +1,261 @@
+/* General Reset */
 @font-face {
-    font-family: "Poppins";
-    src: url(Poppins-Regular.ttf);
+  font-family: "Poppins";
+  src: url(Poppins-Regular.ttf);
 }
 
-body,
-html {
-    font-family: "Poppins", sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    background-color: #f4f4f4;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 header {
-    background: linear-gradient(to right, #6d5dfc 0%, #6e81fc 100%);
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    border-bottom-left-radius: 120px;
-    border-bottom-right-radius: 120px;
-}
-  
-header:hover {
-    padding: 20px 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  background-color: #6e81fc;
+  color: white;
+  padding: 10px 20px;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 
-main{
-    display: inline-block;
-    width: 100%;
-    margin-top: 200px;
+header a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
 }
 
-
-.seller-board{
-    width: 60%;
-    margin: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);    
-    padding:40px 100px;
+main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.board-title{
-    width: 70%;
-    margin: auto;
+.board-title h2 {
+  border-bottom: 3px solid #6e81fc;
+  padding-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.no-houses{
-    text-align: center;
-    margin: auto;
+.seller-board {
+  margin-top: 20px;
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.popup-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    cursor: pointer;
-    color:black; 
-    font-size: 28px;
-    transition-duration: 0.1s;
-}
-.close:hover{
-    transform: scale(1.1);
-    color: #3f3f3f;
-}
-
+.no-houses,
 .house-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    padding: 50px 0px;
+  text-align: center;
+}
+
+.add-house-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.add-house-btn img {
+  margin-right: 8px;
+  width: 20px; /* Set specific size for the image */
 }
 
 .house-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 350px;
-    margin: auto;
-    transition: 0.3s ease;
-}
-.house-card:hover {
-    transform: scale(1.05);
+  background-color: #ffffff;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
 }
 
-.house-card-img {
-    position: relative;
-    padding-bottom: 45%; 
-    overflow: hidden;
+.house-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .house-card-img img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .house-card-details {
-    padding: 15px;
+  padding: 10px;
+  text-align: left;
 }
 
-.house-card-address {
-    font-size: 18px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-
-.house-card-price {
-    font-size: 22px;
-    font-weight: bolder;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-family: sans-serif;
+.house-card-details h3,
+.house-card-details p {
+  margin-bottom: 5px;
 }
 
 .house-card-info {
-    display: flex;
-    margin-bottom: 10px;
-}
-
-.house-card-info span {
-    margin-right: 10px;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
 }
 
 .house-card-features {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 0.85rem;
 }
 
-.house-card-features .feature {
-    margin-right: 30px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #555;
+.feature {
+  display: block;
+  background: #6e81fc;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.edit-link,
+.delete-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 .edit-link {
-    display: inline-block;
-    padding: 8px 30px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: 0.2s ease;
-}
-
-.edit-link:hover{
-    background-color: #146bc8;
-}
-
-
-/* Form Styles */
-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #6d5dfc;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #564ac4;
-}
-
-button[type="reset"] {
-    background-color: #f4368b;
-}
-
-button[type="reset"]:hover {
-    background-color: #cb3277;
-}
-
-.add-house-btn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-button img{
-    width: 20px;
-    margin-right:5px;
+  background-color: #ffc107;
+  color: black;
 }
 
 .delete-btn {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #cd2525;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: 0.2s ease;
+  background-color: #dc3545;
+  color: white;
 }
 
-.delete-btn:hover{
-    background-color: #a82222;
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent scrolling on the popup background */
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #282c34;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-    transition: transform 0.5s ease-in-out;
-    transform: translateY(100%);
-  }
-  
-  footer p {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .show-footer {
-    transform: translateY(0);
-  }
+.popup-content {
+  background: white;
+  margin: 2.5% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: auto; /* Adjust width to fit content */
+  max-width: 600px; /* Maximum width */
+  min-width: 300px; /* Minimum width */
+  max-height: 80%; /* Maximum height to prevent scrolling within the popup */
+  overflow-y: auto; /* Allow scrolling within the popup content if necessary */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #6e81fc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* General Button Styles */
+button,
+.add-house-btn {
+  background-color: #6e81fc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block; /* Change display to inline-block for natural width */
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-top: 10px;
+}
+
+button:hover,
+.add-house-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add subtle shadow on hover */
+}
+
+/* Specific Styles for Different Button Types */
+.edit-link,
+.delete-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: center;
+  width: auto; /* Ensure these buttons are only as wide as their content */
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  margin-left: 10px; /* Add space between edit and delete buttons */
+}
+
+/* Adjust Add House Button */
+.add-house-btn {
+  background-color: #28a745;
+  margin-bottom: 20px; /* Spacing below the button */
+}

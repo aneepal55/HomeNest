@@ -112,6 +112,7 @@ unset($pdo);
 <body>
 
 <header>
+    <h3>Dashboard</h3>
     <div class="profile">
         <p>
         Welcome, <?php echo $_SESSION["username"]; ?> | <a href="logout.php">Logout</a>
