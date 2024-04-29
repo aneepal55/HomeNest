@@ -20,6 +20,7 @@
             </nav>
         </header>
 
+        
         <div id="login-popup" class="popup">
             <div class="popup-content">
                 <a href="#" class="close-btn">&times;</a>
@@ -30,15 +31,14 @@
         <div id="login1-popup" class="popup">
             <div class="popup-content">
                 <a href="#" class="close-btn">&times;</a>
-                <h2 style="color: red;">ACCOUNT SUCCESSFULLY CREATED</h2>
-                <?php include("login.php"); ?>
+                <?php include("login1.php"); ?>
             </div>
         </div>
 
         <div id="signup-popup" class="popup">
             <div class="popup-content">
                 <a href="#" class="close-btn">&times;</a>
-                <?php include_once("signup.php"); ?>
+                <?php include("signup.php"); ?>
             </div>
         </div>
         
@@ -103,5 +103,7 @@
         <footer id="footer">
             <p>Copyright © 2024. All rights reserved.</p>
         </footer>
+
+        <script src="index.js"></script>
     </body>
 </html>

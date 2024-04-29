@@ -5,7 +5,6 @@ session_start();
 $signup_success_message = "";
 if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"]) {
     $signup_success_message = "Sign up successful. You can now log in.";
-    $shouldHide = true;
 }
 
 // Initializes and connects to the database
@@ -49,8 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         }
         exit;
     } else {
-        unset($_SESSION["signup_success"]);
-        $shouldHide = false;
         header("location: index.php#login1-popup");
         exit;
     }
@@ -67,9 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <body>
 <div class="container">
         <h2>Login</h2>
-        <?php if(isset($signup_success_message)) { ?>
-            <p class="<?php echo $shouldHide ? 'success' : ''; ?>"><?php echo $signup_success_message; ?></p>
-        <?php } ?>
+            <p class="error">Invalid username/email or password.</p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="text" name="username_email" placeholder="Username or Email" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
