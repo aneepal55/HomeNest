@@ -44,7 +44,6 @@
             </div>
         </div>
 
-        <!-- Sections -->
         <section id="hero">
             <div class="hero-content">
                 <h2>Welcome to Our World!</h2>
