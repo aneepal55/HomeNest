@@ -10,6 +10,33 @@ if (!isset($_SESSION["user_id"])) {
 // Include database connection
 include "initialize_sellerHouses.php";
 
+// Check if delete request is made
+if (isset($_GET['delete']) && $_GET['delete'] === 'true') {
+    $house_id = $_GET['house_id'];
+
+    // Prepare SQL statement to delete house
+    $sql = "DELETE FROM sellerHouses WHERE id = :house_id AND seller_id = :seller_id";
+
+    if ($stmt = $pdo->prepare($sql)) {
+        // Bind parameters
+        $stmt->bindParam(":house_id", $house_id);
+        $stmt->bindParam(":seller_id", $_SESSION["user_id"]);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            // House deleted successfully, redirect to seller dashboard
+            header("location: seller_dashboard.php");
+            exit;
+        } else {
+            // Error occurred while deleting house
+            echo "Error deleting house. Please try again.";
+        }
+    }
+
+    // Close statement
+    unset($stmt);
+}
+
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data

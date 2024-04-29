@@ -7,30 +7,23 @@ if (!isset($_SESSION["user_id"])) {
     exit;
 }
 
-// Include database connection
 include "initialize_sellerHouses.php";
 
-// Check if house ID is provided in the query parameter
+// Fetch the house details based on the provided ID
 if (isset($_GET['id'])) {
-    // Retrieve house ID from the query parameter
-    $house_id = $_GET['id'];
-
-    // Prepare SQL statement to fetch house details
+    $houseId = $_GET['id'];
+    // Prepare and execute the SQL query to fetch the house details
     $stmt = $pdo->prepare("SELECT * FROM sellerHouses WHERE id = :house_id AND seller_id = :seller_id");
-    $stmt->bindParam(":house_id", $house_id);
+    $stmt->bindParam(":house_id", $houseId);
     $stmt->bindParam(":seller_id", $_SESSION["user_id"]);
     $stmt->execute();
     $house = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Check if house exists and belongs to the current user
-    if (!$house) {
-        header("location: seller_dashboard.php");
-        exit;
-    }
-} else {
-    header("location: seller_dashboard.php");
-    exit;
+    // Close the statement
+    unset($stmt);
 }
+
+// Close connection
+unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -42,11 +35,6 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="profile">
-            <p>Welcome, <?php echo $_SESSION["username"]; ?> | <a href="logout.php">Logout</a></p>
-        </div>
-    </header>
     <main>
         <div class="popup" style="display:block;">
             <div class="popup-content" style="display:block;">
@@ -60,7 +48,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="number" id="price" name="price" value="<?php echo $house['price']; ?>" required>
+                    <input type="number" id="price" name="price" step="0.01" value="<?php echo $house['price']; ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="bedrooms">Number of Bedrooms:</label>

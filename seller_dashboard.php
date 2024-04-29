@@ -8,7 +8,6 @@ if (!isset($_SESSION["user_id"])) {
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-$_SESSION['success_message'] = "";
 
 include "initialize_sellerHouses.php";
 
@@ -68,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(":image", $file_name);
             } else {
                 // Handle the upload error
-                $success_message = "Error uploading the image. Please try again.";
+                echo "Error uploading the image. Please try again.";
                 // Bind NULL to the :image parameter
                 $null_value = null;
                 $stmt->bindValue(":image", $null_value, PDO::PARAM_NULL);
@@ -81,12 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Attempt to execute the prepared statement
         if($stmt->execute()){
-            // Set success message
-            $_SESSION['success_message'] = "House added Successfully!";
             unset($_POST);
             header("location:seller_dashboard.php");
         } else{
-            $_SESSION['success_message'] = "Oops! Something went wrong. Please try again later.";
+            echo "Oops! Something went wrong. Please try again later.";
         }
     }
 
@@ -128,22 +125,14 @@ unset($pdo);
         <h2>Your Houses For Sale</h2>
     </div>
 
-    <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['success_message'])): ?>
-            <div class="success-message" style="margin:auto; width:20%; text-align:center;"><?php echo $_SESSION['success_message']; ?></div>
-            <script>
-                // Show the success message div
-                document.querySelector('.success-message').style.display = 'block';
-            </script>
-    <?php endif; ?>
-
     <div class="seller-board">
         <?php if (empty($houses)): ?>
         <div class="no-houses">
             <p>You currently are not selling any Houses. Click to add a Home!</p>
-            <button id="add-house-btn" class="add-house-btn"><img src="add.png">Add A Home</button>
+            <button id="add-house-btn" class="add-house-btn" style="margin:auto;"><img src="images/add.png"><div>Add A Home</div></button>
         </div>
         <?php else: ?>
-            <button id="add-house-btn" class="add-house-btn"><img src="add.png">Add A Home</button>
+            <button id="add-house-btn" class="add-house-btn"><img src="images/add.png"><div>Add A Home</div></button>
             <div class="house-cards">
                 <?php foreach ($houses as $house): ?>
                     <div class="house-card">
@@ -178,7 +167,8 @@ unset($pdo);
                                 <?php endif; ?>
                                 <span class="feature">Property Tax: $<?php echo number_format($house['property_tax'], 2); ?></span>
                             </div>
-                            <a href="edit-house.php?id=<?php echo $house['id']; ?>" class="edit-link">Edit</a>
+                            <a href="#" class="edit-link" onclick="openEditPopup(<?php echo $house['id']; ?>)">Edit</a>
+                            <button class="delete-btn" data-house-id="<?php echo $house['id']; ?>">Delete</button>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -194,28 +184,63 @@ unset($pdo);
         <div id="add-house-form" style="display:none;">
             <h2>Add a House</h2>
             <form action="" method="post" enctype="multipart/form-data">
-                <input type="text" name="address" placeholder="Address" required>
-                <input type="number" name="price" placeholder="Price" step="0.01" required>
-                <input type="number" name="bedrooms" placeholder="Number of Bedrooms" required>
-                <input type="number" name="bathrooms" placeholder="Number of Bathrooms" required>
-                <input type="number" name="site_sqft" placeholder="Site Square Footage" required>
-                <input type="number" name="age" placeholder="Age of Property" required>
-                <select name="garden">
-                    <option value="1">Has Garden</option>
-                    <option value="0">No Garden</option>
-                </select>
-                <select name="parking">
-                    <option value="1">Has Parking</option>
-                    <option value="0">No Parking</option>
-                </select>
-                <input type="text" name="proximity_facilities" placeholder="Proximity to Nearby Facilities (Optional)">
-                <input type="text" name="proximity_roads" placeholder="Proximity to Main Roads (Optional)">
-                <input type="file" name="house_image" accept="image/.jpg,image/.jpeg,image/.png">
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" name="address" placeholder="Address" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" name="price" placeholder="Price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms">Number of Bedrooms:</label>
+                    <input type="number" name="bedrooms" placeholder="Number of Bedrooms" required>
+                </div>
+                <div class="form-group">
+                    <label for="bathrooms">Number of Bathrooms:</label>
+                    <input type="number" name="bathrooms" placeholder="Number of Bathrooms" required>
+                </div>
+                <div class="form-group">
+                    <label for="site_sqft">Site Square Footage:</label>
+                    <input type="number" name="site_sqft" placeholder="Site Square Footage" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age of Property:</label>
+                    <input type="number" name="age" placeholder="Age of Property" required>
+                </div>
+                <div class="form-group">
+                    <label for="garden">Garden:</label>
+                    <select name="garden">
+                        <option value="1">Has Garden</option>
+                        <option value="0">No Garden</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="parking">Parking:</label>
+                    <select name="parking">
+                        <option value="1">Has Parking</option>
+                        <option value="0">No Parking</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="proximity_facilities">Proximity to Nearby Facilities:</label>
+                    <input type="text" name="proximity_facilities" placeholder="Nearby Facilities (Optional)">
+                </div>
+                <div class="form-group">
+                    <label for="proximity_roads">Proximity to Main Roads:</label>
+                    <input type="text" name="proximity_roads" placeholder="Main Roads (Optional)">
+                </div>
+                <div class="form-group">
+                    <input type="file" name="house_image" accept="image/.jpg,image/.jpeg,image/.png">
+                </div>
                 <button type="submit">Add House</button>
             </form>
         </div>
     </div>
 </div>
+
+<div id="edit-form-container" style="display: none; z-index:1;"></div>
+
 </main>
 
 
@@ -226,7 +251,7 @@ unset($pdo);
     const popup = document.getElementById('popup');
     const closeBtn = document.getElementById('close');
     const addHouseForm = document.getElementById('add-house-form');
-    const successMessage = document.querySelector('.success-message');
+    const deleteButtons = document.querySelectorAll('.delete-btn');
 
     function clearInputFields() {
         const inputFields = addHouseForm.querySelectorAll('input, textarea');
@@ -238,20 +263,45 @@ unset($pdo);
     addHouseBtn.addEventListener('click', () => {
         popup.style.display = 'block';
         addHouseForm.style.display = 'block';
-        successMessage.style.display = 'none';
     });
 
     closeBtn.addEventListener('click', () => {
         popup.style.display = 'none';
+        document.getElementById('edit-form-container').innerHTML = '';
         if (addHouseForm) {
             addHouseForm.style.display = 'none';
             clearInputFields();
         }
-        if (successMessage) {
-            successMessage.style.display = 'none';
-            clearInputFields();
-        }
+        clearInputFields();
+
     });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const houseId = button.dataset.houseId;
+            const confirmed = confirm('Are you sure you want to delete this house?');
+
+            if (confirmed) {
+                window.location.href = `update-house.php?delete=true&house_id=${houseId}`;
+            }
+        });
+    });
+    
+
+    function openEditPopup(houseId) {
+        // Fetch the edit form for the specific house ID using AJAX
+        fetch(`edit-house.php?id=${houseId}`)
+            .then(response => response.text())
+            .then(data => {
+                // Load the edit form into the popup container
+                document.getElementById('edit-form-container').innerHTML = data;
+                    // Display the popup
+                document.getElementById('popup').style.display = 'block';
+                document.getElementById('edit-form-container').style.display = 'block';
+
+            })
+            .catch(error => console.error('Error fetching edit form:', error));
+    }
     
 </script>
 </body>
