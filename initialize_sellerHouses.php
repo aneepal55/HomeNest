@@ -1,15 +1,13 @@
 <?php
-// Database connection
 $host = "localhost";
-$dbusername = "awilliams589";
-$dbpassword = "awilliams589";
-$dbname = "awilliams589";
+$dbusername = "apallapolu1";
+$dbpassword = "apallapolu1";
+$dbname = "apallapolu1";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Create table if not exists
     $sql = "CREATE TABLE IF NOT EXISTS sellerHouses (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         seller_id INT(6) UNSIGNED NOT NULL, 

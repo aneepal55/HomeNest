@@ -1,21 +1,17 @@
 <?php
 session_start();
 
-// Check if signup was successful and display message
 $signup_success_message = "";
 if (isset($_SESSION["signup_success"]) && $_SESSION["signup_success"]) {
     $signup_success_message = "Sign up successful. You can now log in.";
 }
 
-// Initializes and connects to the database
 include "initialize_database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-    // Check login credentials and redirect to homepage if successful
     $username_email = $_POST['username_email'];
     $password = $_POST['password'];
     
-    // Check if the input is an email address
     if (filter_var($username_email, FILTER_VALIDATE_EMAIL)) {
         $sql = "SELECT * FROM account WHERE email = :username_email";
     } else {
@@ -31,11 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     if ($user && password_verify($password, $user['password']) ) {
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["name_first"];
-        $_SESSION["account_type"] = $user["account_type"]; // Store account type in session
+        $_SESSION["account_type"] = $user["account_type"];
 
         unset($_SESSION["signup_success"]);
 
-        // Redirect based on account type
         if ($user["account_type"] == "buyer") {
             header("location: buyer_dashboard.php");
             exit;

@@ -9,22 +9,21 @@ window.addEventListener("scroll", function () {
 
 window.addEventListener("scroll", function () {
     var footer = document.getElementById("footer");
-    // Check if user has scrolled to the bottom of the page
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        footer.classList.add("show-footer"); // Add class to show footer
+        footer.classList.add("show-footer");
     } else {
-        footer.classList.remove("show-footer"); // Remove class to hide footer
+        footer.classList.remove("show-footer");
     }
 });
 
 document.getElementById('loginLink').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor click behavior
-    const currentUrl = window.location.href.split('#')[0]; // Remove existing hash if there is one
-    window.location.href = currentUrl + '#login-popup'; // Append the new hash
+    event.preventDefault();
+    const currentUrl = window.location.href.split('#')[0];
+    window.location.href = currentUrl + '#login-popup';
 });
 
 document.getElementById('signupLink').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default anchor click behavior
-    const currentUrl = window.location.href.split('#')[0]; // Remove existing hash if there is one
-    window.location.href = currentUrl + '#signup-popup'; // Append the new hash
+    event.preventDefault();
+    const currentUrl = window.location.href.split('#')[0];
+    window.location.href = currentUrl + '#signup-popup';
 });

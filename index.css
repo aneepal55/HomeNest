@@ -68,13 +68,13 @@ header nav ul li a:hover {
 
 section {
   padding: 80px 20px;
-  margin-top: 60px; /* Adjusted to account for fixed header */
+  margin-top: 60px;
   text-align: center;
   transition: transform 0.3s ease-out;
-  background-color: #fff; /* Light background for contrast */
-  border-bottom: 2px solid #eee; /* Subtle separation */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  overflow: hidden; /* Prevents overflow */
+  background-color: #fff;
+  border-bottom: 2px solid #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .hovering {
@@ -89,11 +89,10 @@ section {
 #our-services,
 #competition,
 #commitment {
-  margin-top: 0; /* Remove additional top margin */
-  padding: 60px 20px; /* Consistent padding */
+  margin-top: 0;
+  padding: 60px 20px;
 }
 
-/* Specific backgrounds for each section for better differentiation */
 #what-we-do {
   background-color: #fafafa;
 }
@@ -187,36 +186,35 @@ footer p {
   transform: translateY(0);
 }
 
-/* Popup styles */
 .popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top, increase if needed */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
-    overflow: auto; /* Enable scroll if needed, removed conflicting overflow-y */
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
 }
 
 .popup-content {
-    position: relative; /* Added for better control of positioning */
-    width: 90%; /* Adjust width of the inner content */
-    max-width: 600px; /* Maximum width */
-    margin: 5% auto; /* Changed to percentage for better vertical alignment */
-    background: white; /* Background color */
-    padding: 20px; /* Padding inside the content */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for pop-up */
-    border-radius: 8px; /* Rounded corners */
-    box-sizing: border-box; /* Ensures padding and border are included in width/height */
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 5% auto;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
-    .popup-content {
-        margin: 20% auto; /* Increased margin on smaller devices */
-        padding: 10px; /* Reduced padding on smaller devices */
-    }
+  .popup-content {
+    margin: 20% auto;
+    padding: 10px;
+  }
 }
 
 .close-btn {

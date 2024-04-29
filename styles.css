@@ -76,7 +76,7 @@ main {
 
 .add-house-btn img {
   margin-right: 8px;
-  width: 20px; /* Set specific size for the image */
+  width: 20px;
 }
 
 .house-card {
@@ -163,7 +163,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Prevent scrolling on the popup background */
+  overflow: hidden;
 }
 
 .popup-content {
@@ -171,11 +171,11 @@ main {
   margin: 2.5% auto;
   padding: 20px;
   border-radius: 5px;
-  width: auto; /* Adjust width to fit content */
-  max-width: 600px; /* Maximum width */
-  min-width: 300px; /* Minimum width */
-  max-height: 80%; /* Maximum height to prevent scrolling within the popup */
-  overflow-y: auto; /* Allow scrolling within the popup content if necessary */
+  width: auto;
+  max-width: 600px;
+  min-width: 300px;
+  max-height: 80%;
+  overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -219,7 +219,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* General Button Styles */
 button,
 .add-house-btn {
   background-color: #6e81fc;
@@ -228,7 +227,7 @@ button,
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  display: inline-block; /* Change display to inline-block for natural width */
+  display: inline-block;
   font-size: 16px;
   transition: background-color 0.3s, box-shadow 0.3s;
   margin-top: 10px;
@@ -237,25 +236,23 @@ button,
 button:hover,
 .add-house-btn:hover {
   background-color: #0056b3;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add subtle shadow on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific Styles for Different Button Types */
 .edit-link,
 .delete-btn {
   padding: 8px 12px;
   font-size: 14px;
   text-align: center;
-  width: auto; /* Ensure these buttons are only as wide as their content */
+  width: auto;
 }
 
 .delete-btn {
   background-color: #dc3545;
-  margin-left: 10px; /* Add space between edit and delete buttons */
+  margin-left: 10px;
 }
 
-/* Adjust Add House Button */
 .add-house-btn {
   background-color: #28a745;
-  margin-bottom: 20px; /* Spacing below the button */
+  margin-bottom: 20px;
 }

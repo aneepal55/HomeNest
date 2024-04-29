@@ -1,12 +1,9 @@
-/* General body styles */
 body {
   background-color: #f4f4f9;
   color: #333;
 }
 
-/* Container styles */
 
-/* Input and button styling */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -16,11 +13,11 @@ input[type="password"] {
   margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Makes sure padding doesn't affect width */
+  box-sizing: border-box;
 }
 
 #signupButton {
-  background-color: #6e81fc; /* Green */
+  background-color: #6e81fc;
   color: white;
   padding: 14px 20px;
   border: none;
@@ -34,7 +31,7 @@ input[type="password"] {
 }
 
 #loginButton {
-  background-color: #6e81fc; /* Green */
+  background-color: #6e81fc;
   color: white;
   padding: 14px 20px;
   border: none;
@@ -47,7 +44,6 @@ input[type="password"] {
   background-color: #6e81fc;
 }
 
-/* Error message styling */
 .error {
   color: #d8000c;
   background-color: #ffd2d2;
@@ -68,7 +64,6 @@ input[type="password"] {
   text-align: center;
 }
 
-/* Radio button labels more clickable */
 input[type="radio"] {
   margin-right: 5px;
 }
@@ -79,7 +74,6 @@ label {
   cursor: pointer;
 }
 
-/* Link styling */
 #loginLink {
   color: #007bff;
   text-decoration: none;

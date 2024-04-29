@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Check if user is logged in, if not redirect to login page
 if (!isset($_SESSION["user_id"])) {
     header("location: logout.php");
     exit;
@@ -11,17 +10,15 @@ ini_set('display_errors', 1);
 
 include "initialize_sellerHouses.php";
 
-// Query to fetch all houses for the current seller
 $stmt = $pdo->prepare("SELECT * FROM sellerHouses WHERE seller_id = :seller_id");
 $stmt->bindParam(":seller_id", $_SESSION["user_id"]);
 $stmt->execute();
 $houses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 unset($stmt);
-// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST["address"];
-    $price = number_format($_POST["price"], 2, '.', ''); // Format the price with 2 decimal places
+    $price = number_format($_POST["price"], 2, '.', '');
     $bedrooms = $_POST["bedrooms"];
     $bathrooms = $_POST["bathrooms"];
     $site_sqft = $_POST["site_sqft"];
@@ -31,15 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $proximity_facilities = $_POST["proximity_facilities"];
     $proximity_roads = $_POST["proximity_roads"];
 
-    // Calculate property tax (7% of the price)
     $property_tax = $price * 0.07;
 
-    // Prepare an insert statement
     $sql = "INSERT INTO sellerHouses (seller_id, address, price, bedrooms, bathrooms, site_sqft, age, garden, parking, proximity_facilities, proximity_roads, property_tax, image) 
             VALUES (:seller_id, :address, :price, :bedrooms, :bathrooms, :site_sqft, :age, :garden, :parking, :proximity_facilities, :proximity_roads, :property_tax, :image)";
 
     if($stmt = $pdo->prepare($sql)){
-        // Bind variables to the prepared statement as parameters
         $stmt->bindParam(":seller_id", $_SESSION["user_id"]);
         $stmt->bindParam(":address", $address);
         $stmt->bindParam(":price", $price);
@@ -54,31 +48,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":property_tax", $property_tax);
 
         if (isset($_FILES['house_image']) && $_FILES['house_image']['error'] === UPLOAD_ERR_OK) {
-            // Get the file extension
             $file_extension = strtolower(pathinfo($_FILES['house_image']['name'], PATHINFO_EXTENSION));
         
-            // Generate a unique file name
             $file_name = uniqid() . '.' . $file_extension;
         
-            // Move the uploaded file to the images folder
             $upload_path = 'images/' . $file_name;
             if (move_uploaded_file($_FILES['house_image']['tmp_name'], $upload_path)) {
-                // Bind the file name to the prepared statement
                 $stmt->bindParam(":image", $file_name);
             } else {
-                // Handle the upload error
                 echo "Error uploading the image. Please try again.";
-                // Bind NULL to the :image parameter
                 $null_value = null;
                 $stmt->bindValue(":image", $null_value, PDO::PARAM_NULL);
             }
         } else {
-            // Bind NULL to the :image parameter if no image was uploaded
             $null_value = null;
             $stmt->bindValue(":image", $null_value, PDO::PARAM_NULL);
         }
 
-        // Attempt to execute the prepared statement
         if($stmt->execute()){
             unset($_POST);
             header("location:seller_dashboard.php");
@@ -87,17 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Close statement
     unset($stmt);
 }
 
 unset($_POST);
 
-// Close connection
 unset($pdo);
 
-// Assuming $pdo is already initialized and connected to the database
-// Query database to fetch user data for displaying on homepage
+
 ?>
 
 <!DOCTYPE html>
@@ -257,7 +240,7 @@ unset($pdo);
     function clearInputFields() {
         const inputFields = addHouseForm.querySelectorAll('input, textarea');
         inputFields.forEach(input => {
-            input.value = ''; // clear input fields
+            input.value = '';
         });
     }
 
@@ -290,13 +273,10 @@ unset($pdo);
     
 
     function openEditPopup(houseId) {
-        // Fetch the edit form for the specific house ID using AJAX
         fetch(`edit-house.php?id=${houseId}`)
             .then(response => response.text())
             .then(data => {
-                // Load the edit form into the popup container
                 document.getElementById('edit-form-container').innerHTML = data;
-                    // Display the popup
                 document.getElementById('popup').style.display = 'block';
                 document.getElementById('edit-form-container').style.display = 'block';
 

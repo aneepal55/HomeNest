@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Check if user is already logged in and redirect
 if (isset($_SESSION["user_id"])) {
     if ($_SESSION["account_type"] == "buyer") {
         header("location: buyer_dashboard.php");
@@ -15,7 +14,6 @@ if (isset($_SESSION["user_id"])) {
     }
 }
 
-// Initializes and connects to the database
 include "initialize_database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,10 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $account_type = $_POST['account_type'];
 
-    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
-    // Check if the username or email already exists
     $stmt_check = $pdo->prepare("SELECT * FROM account WHERE username = :username OR email = :email");
     $stmt_check->bindParam(':username', $username);
     $stmt_check->bindParam(':email', $email);

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Check if user is logged in, if not redirect to login page
 if (!isset($_SESSION["user_id"])) {
     header("location: logout.php");
     exit;
@@ -9,20 +8,16 @@ if (!isset($_SESSION["user_id"])) {
 
 include "initialize_sellerHouses.php";
 
-// Fetch the house details based on the provided ID
 if (isset($_GET['id'])) {
     $houseId = $_GET['id'];
-    // Prepare and execute the SQL query to fetch the house details
     $stmt = $pdo->prepare("SELECT * FROM sellerHouses WHERE id = :house_id AND seller_id = :seller_id");
     $stmt->bindParam(":house_id", $houseId);
     $stmt->bindParam(":seller_id", $_SESSION["user_id"]);
     $stmt->execute();
     $house = $stmt->fetch(PDO::FETCH_ASSOC);
-    // Close the statement
     unset($stmt);
 }
 
-// Close connection
 unset($pdo);
 ?>
 
@@ -40,7 +35,6 @@ unset($pdo);
             <div class="popup-content" style="display:block;">
             <h2>Edit House Details</h2>
             <form action="update-house.php" method="post">
-                <!-- Display existing details in input fields -->
                 <input type="hidden" name="house_id" value="<?php echo $house['id']; ?>">
                 <div class="form-group">
                     <label for="address">Address:</label>
