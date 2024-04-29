@@ -18,13 +18,28 @@
             <h1>HomeNest</h1>
             <nav>
                 <ul>
-                    <li><a href="#"><i class="fas fa-sign-in-alt"></i> Log
+                    <li><a href="#login-popup"><i class="fas fa-sign-in-alt"></i> Log
                             In</a></li>
-                    <li><a href="#"><i class="fas fa-user-plus"></i> Sign
+                    <li><a href="#signup-popup"><i class="fas fa-user-plus"></i> Sign
                             Up</a></li>
                 </ul>
             </nav>
         </header>
+
+        <div id="login-popup" class="popup">
+            <div class="popup-content">
+                <a href="#" class="close-btn">&times;</a>
+                <?php include_once("login.php"); ?>
+            </div>
+        </div>
+
+        <div id="signup-popup" class="popup">
+            <div class="popup-content">
+                <a href="#" class="close-btn">&times;</a>
+                <?php include_once("signup.php"); ?>
+            </div>
+        </div>
+        
 
         <!-- Sections -->
         <section id="hero">

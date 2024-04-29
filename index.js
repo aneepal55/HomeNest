@@ -16,3 +16,15 @@ window.addEventListener("scroll", function () {
         footer.classList.remove("show-footer"); // Remove class to hide footer
     }
 });
+
+document.getElementById('loginLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor click behavior
+    const currentUrl = window.location.href.split('#')[0]; // Remove existing hash if there is one
+    window.location.href = currentUrl + '#login-popup'; // Append the new hash
+});
+
+document.getElementById('signupLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default anchor click behavior
+    const currentUrl = window.location.href.split('#')[0]; // Remove existing hash if there is one
+    window.location.href = currentUrl + '#signup-popup'; // Append the new hash
+});
