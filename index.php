@@ -103,6 +103,5 @@
         <footer id="footer">
             <p>Copyright © 2024. All rights reserved.</p>
         </footer>
-        <script src="index.js"></script>
     </body>
 </html>
