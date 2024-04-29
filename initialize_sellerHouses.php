@@ -14,11 +14,17 @@ try {
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         seller_id INT(6) UNSIGNED NOT NULL, 
         address VARCHAR(255) NOT NULL,
-        price INT(6) UNSIGNED NOT NULL,
-        bed INT(6) UNSIGNED NOT NULL,
-        bath INT(6) UNSIGNED NOT NULL,
-        sqft INT(6) UNSIGNED NOT NULL,
-        image MEDIUMBLOB NOT NULL DEFAULT 'default_image.png',
+        price DECIMAL(10, 2) NOT NULL, 
+        bedrooms INT(6) UNSIGNED NOT NULL,
+        bathrooms INT(6) UNSIGNED NOT NULL,
+        site_sqft INT(6) UNSIGNED NOT NULL,
+        age INT(6) UNSIGNED NOT NULL,
+        garden BOOLEAN NOT NULL,
+        parking BOOLEAN NOT NULL,
+        proximity_facilities VARCHAR(255) NULL,
+        proximity_roads VARCHAR(255) NULL,
+        property_tax DECIMAL(10, 2) NOT NULL, 
+        image VARCHAR(30) NULL,
         FOREIGN KEY (seller_id) REFERENCES account(id)
         )";
     
