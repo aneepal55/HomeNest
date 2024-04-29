@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
@@ -70,9 +70,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="success"><?php echo $signup_success_message; ?></p>
         <?php } ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="text" name="username_email" placeholder="Username or Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <input type="text" name="username_email" placeholder="Username or Email" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit" id="loginButton">Login</button>
         </form>
         <p>Don't have an account? <a href="#" id="signupLink">Sign up</a></p>
     </div>

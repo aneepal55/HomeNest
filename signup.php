@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $name_first;
         
         $_SESSION["signup_success"] = true;
-        header("location: login.php");
+        header("location: index.php#login1-popup");
         exit;
     }
 }
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="form.css">
 </head>
 <body>
 <div class="container">
@@ -76,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p class="error"><?php echo $signup_error; ?></p>
         <?php } ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="name_first" placeholder="First Name" required>
-            <input type="text" name="name_last" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="text" name="name_first" placeholder="First Name" required><br>
+            <input type="text" name="name_last" placeholder="Last Name" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
             <label for="account_type">Account Type:</label>
             <div>
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="radio" id="admin" name="account_type" value="admin" required>
                 <label for="admin">Admin</label>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" id="signupButton">Sign Up</button>
         </form>
         <p>Already have an account? <a href="#" id="loginLink">Login</a></p>
     </div>
