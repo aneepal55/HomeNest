@@ -79,11 +79,10 @@
         <section id="competition">
             <div class="hovering">
                 <h2>Choose Us Over the Competition</h2>
-                <p>HomeNest stands out due to its user-friendly design,
-                    comprehensive property listings, and advanced features like
-                    credit card type<br> detection during payments. The use of SCRUM
-                    methodology ensures that the platform is developed with high
-                    standards and <br>agility, allowing for quick updates and
+                <p>HomeNest stands out due to its user-friendly design and
+                    comprehensive property listings detection during payments. The use of SCRUM
+                    <br>methodology ensures that the platform is developed with high
+                    standards and agility, allowing<br> for quick updates and
                     feature integrations based on user <br>feedback and market
                     demands.</p>
             </div>
