@@ -41,6 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $proximity_facilities = $_POST["proximity_facilities"];
     $proximity_roads = $_POST["proximity_roads"];
 
+    $property_tax = $price * 0.07;
+
     $sql = "UPDATE sellerHouses 
             SET address = :address, 
                 price = :price, 
@@ -51,7 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 garden = :garden, 
                 parking = :parking, 
                 proximity_facilities = :proximity_facilities, 
-                proximity_roads = :proximity_roads
+                proximity_roads = :proximity_roads,
+                property_tax = :property_tax
             WHERE id = :house_id AND seller_id = :seller_id";
 
     if ($stmt = $pdo->prepare($sql)) {
@@ -67,6 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":parking", $parking);
         $stmt->bindParam(":proximity_facilities", $proximity_facilities);
         $stmt->bindParam(":proximity_roads", $proximity_roads);
+        $stmt->bindParam(":property_tax", $property_tax);
+
 
         if ($stmt->execute()) {
             header("location: seller_dashboard.php");
