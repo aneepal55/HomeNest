@@ -210,13 +210,6 @@ footer p {
   box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
-  .popup-content {
-    margin: 20% auto;
-    padding: 10px;
-  }
-}
-
 .close-btn {
   color: #aaa;
   float: right;
